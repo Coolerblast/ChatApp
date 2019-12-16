@@ -57,12 +57,12 @@ export default class SignUpScreen extends Component {
           placeholder="Password"
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
+          key="password"
           secureTextEntry
         />
-        {this.isFieldInError('emailAddress') &&
-          this.getErrorsInField('emailAddress').map(errorMessage => <Text>{errorMessage}</Text>)}
-        {this.isFieldInError('password') &&
-          this.getErrorsInField('password').map(errorMessage => <Text>{errorMessage}</Text>)}
+        {this.state.errors != null ? (
+          <Text style={styles.errortext}>{this.getErrorMessages()}</Text>
+        ) : null}
         <Button title="Sign Up" onPress={() => this.validate()} style={styles.button} />
         <TouchableHighlight onPress={() => this.props.navigation.navigate('Login')}>
           <Text style={styles.subtext}>Return to login.</Text>
